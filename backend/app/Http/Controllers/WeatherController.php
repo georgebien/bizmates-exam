@@ -36,13 +36,15 @@ class WeatherController extends Controller
             $response = $this->weatherService->getCities($request->get('search'));
             $cities = [];
             foreach ($response['hits'] as $value) {
-                $cities[] = $value['administrative'][0];
+                if (isset($value['administrative'])) {
+                    $cities[] = $value['administrative'][0];
+                }
             }
 
             return $this->response(
                 Response::HTTP_OK,
                 self::GET_MESSAGE,
-                $cities
+                array_values(array_unique($cities))
             );
             
         } catch (Exception $exception) {

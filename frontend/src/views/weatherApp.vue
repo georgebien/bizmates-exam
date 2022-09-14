@@ -3,12 +3,24 @@
     <main>
       <vue-select
         class="mt-5 vselect" 
-        placeholder="Type city" 
-        :options="searchOptions"
+        placeholder="Search city.." 
+        v-model="selectedCity"
+        label="name"
+        :filterable="false"
+        :options="cities"
+        @search="onSearch"
       >
-        
+        <template slot="no-options">Type to see the results</template>
+        <template slot="option" slot-scope="option">
+          <div class="d-center">{{ option.name }}</div>
+        </template>
+        <template slot="selected-option" slot-scope="option">
+          <div class="selected d-center">
+            <div class="d-center">{{ option.name }}</div>
+          </div>
+        </template>
       </vue-select>
-      <weatherCard></weatherCard>
+      <weatherCard v-show="selectedCity"></weatherCard>
     </main>
 
   </div>
@@ -29,12 +41,31 @@ export default {
 
   data() {
     return {
-      searchOptions: ['Canada', 'United States']
+      cities: [],
+      selectedCity: null
     }
   },
 
-  mounted() {
-    getCities('Osaka');
+  watch: {
+    selectedCity: function(value) {
+      if (!value) {
+        this.cities = [];
+      }
+    }
+  },
+
+  methods: {
+    onSearch(search, loading) {
+      if (search.length) {
+        loading(true);
+
+        getCities(search).then(({data:{data}}) => {
+          this.cities = [];
+          this.cities = data;
+          loading(false);
+        })
+      }
+    }
   }
 }
 </script>
@@ -54,5 +85,28 @@ main {
   padding: 25px;
   margin: auto;
   width: 50%;
+}
+
+.v-select .dropdown li {
+  border-bottom: 1px solid rgba(112, 128, 144, 0.1);
+}
+
+.v-select .dropdown li:last-child {
+  border-bottom: none;
+}
+
+.v-select .dropdown li a {
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 1.25em;
+  color: #3c3c3c;
+}
+
+.v-select .dropdown-menu .active > a {
+  color: #fff;
+}
+
+.vs__dropdown-toggle {
+  height: 55px;
 }
 </style>
