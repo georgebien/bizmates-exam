@@ -135,8 +135,8 @@ export default {
     },
 
     getForecast() {
-      getForecast(this.weatherData.city).then(({data:{ data }}) => {
-        this.forecast = data.list;
+      getForecast(this.weatherData.city).then(({data:{ data: { list } }}) => {
+        this.forecast = list;
       })
     }
   }

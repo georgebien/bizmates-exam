@@ -2,7 +2,7 @@
   <div>
     <main>
       <vue-select
-        class="mt-5 vselect" 
+        class="mt-3 vselect" 
         placeholder="Search city.." 
         v-model="selectedCity"
         label="name"
@@ -20,8 +20,14 @@
           </div>
         </template>
       </vue-select>
-      <weatherCard v-show="selectedCity && weather" :weather="weather"></weatherCard>
-      <placesCard v-show="selectedCity" :city="selectedCity"></placesCard>
+      <weatherCard 
+        v-show="selectedCity" 
+        :weather="weather"
+      ></weatherCard>
+      <placesCard 
+        v-show="selectedCity && weather" 
+        :city="selectedCity"
+      ></placesCard>
     </main>
 
   </div>
@@ -53,7 +59,7 @@ export default {
         'Nagoya'
       ],
       selectedCity: null,
-      weather: null,
+      weather: null
     }
   },
 
@@ -71,8 +77,10 @@ export default {
 
   methods: {
     onSelected() {
-      getWeather(this.selectedCity).then(({data: {data }}) => {
+      this.weatherLoaded = false;
+      getWeather(this.selectedCity).then(({data: { data }}) => {
         this.weather = data;
+        this.weatherLoaded = true;
       });
     }
   }

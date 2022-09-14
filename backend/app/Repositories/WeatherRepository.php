@@ -58,14 +58,14 @@ class WeatherRepository implements WeatherRepositoryInterface
     public function getPlaces(string $city)
     {
         $url = sprintf(
-            'https://api.foursquare.com/v3/places/search?query=%s&limit=6',
+            'https://api.foursquare.com/v3/places/search?categories=16000&near=%s&limit=6',
             strtolower($city),
             self::API_KEY_TWO
         );
 
         try {
             $response = $this->client->get(
-                'https://api.foursquare.com/v2/venues/search?client_id=KOFV21OFKFTTND2YAFWFC1SEYNYR2ECXLAY32NKYBXX35FPZ&client_secret=OVTJIWEPFCG1T1YTHV0MI0KZWWCO1A3EFNQLEW0QBFO2OV2D&oauth_token=fsq3lXAxp4pP4ixPfv%2B5OrZ1ULEZxJn7odiGqQ4%2BxHgzqSA%3D',
+                $url,
                 [
                     'headers' => [
                       'Authorization' => self::API_KEY_FOURSQUARE,
@@ -73,9 +73,6 @@ class WeatherRepository implements WeatherRepositoryInterface
                     ]
                 ]
             );
-
-            var_dump(json_decode($response->getBody()->getContents(), true));
-            exit;
 
             return json_decode($response->getBody()->getContents(), true);
         } catch (Exception $exception) {
