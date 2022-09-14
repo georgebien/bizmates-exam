@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Weather';
+  src: url('../fonts/weather.ttf');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap');
+
+body {
+  font-family: Poppins !important;
+  font-weight: 100;
+}
