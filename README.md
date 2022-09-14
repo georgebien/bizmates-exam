@@ -5,11 +5,13 @@ Good day Sir!
 Here is my technical exam
 
 -- Environment setup --
+
 I made an environment where in the frontend and the backend is in a separate folders
 to make it clean and more organized.
 
 
 -- Frontend --
+
 For the frontend I used the vueJs framework as well as javascript, axios for sending a request and some css for the designs
 
 I have decided to make the UI/UX as simple as possible since based on the
@@ -21,6 +23,7 @@ and places.
 
 
 -- Backend --
+
 For the backend I used the laravel framework with the controller, service, repo, repo interface and trait
 for fetching the data from the external api.
 
