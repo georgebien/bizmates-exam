@@ -16,21 +16,18 @@ class WeatherService
         $this->weatherRepository = $weatherRepository;
     }
 
-    public function getCities(string $keyword)
-    {
-        return $this->weatherRepository->getCities($keyword);
-    }
-    
     public function getWeather(string $city)
     {
         return $this->weatherRepository->getWeather($city);
     }
     
-    public function getForecast(float $latitude, float $longitude)
+    public function getForecast(string $city)
     {
-        return $this->weatherRepository->getForecast(
-            $latitude,
-            $longitude
-        );
+        return $this->weatherRepository->getForecast($city);
+    }
+
+    public function getPlaces(string $city)
+    {
+        return $this->weatherRepository->getPlaces($city);
     }
 }

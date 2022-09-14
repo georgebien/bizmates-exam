@@ -8,7 +8,7 @@
         label="name"
         :filterable="false"
         :options="cities"
-        @search="onSearch"
+        @input="onSelected"
       >
         <template slot="no-options">Type to see the results</template>
         <template slot="option" slot-scope="option">
@@ -20,7 +20,8 @@
           </div>
         </template>
       </vue-select>
-      <weatherCard v-show="selectedCity"></weatherCard>
+      <weatherCard v-show="selectedCity && weather" :weather="weather"></weatherCard>
+      <placesCard v-show="selectedCity" :city="selectedCity"></placesCard>
     </main>
 
   </div>
@@ -29,20 +30,30 @@
 <script>
 import vueSelect from 'vue-select'
 import weatherCard from '../components/weatherCard.vue'
-import { getCities } from '../services/service';
+import placesCard from '../components/placesCard.vue'
+import { getWeather } from '../services/service';
 
 export default {
   name: 'WeatherApp',
   
   components: {
     vueSelect,
-    weatherCard
+    weatherCard,
+    placesCard
   },
 
   data() {
     return {
-      cities: [],
-      selectedCity: null
+      cities: [
+        'Tokyo', 
+        'Yokohama', 
+        'Kyoto', 
+        'Osaka', 
+        'Sapporo', 
+        'Nagoya'
+      ],
+      selectedCity: null,
+      weather: null,
     }
   },
 
@@ -54,17 +65,15 @@ export default {
     }
   },
 
-  methods: {
-    onSearch(search, loading) {
-      if (search.length) {
-        loading(true);
+  mounted() {
+    this.cities = this.cities.sort()
+  },
 
-        getCities(search).then(({data:{data}}) => {
-          this.cities = [];
-          this.cities = data;
-          loading(false);
-        })
-      }
+  methods: {
+    onSelected() {
+      getWeather(this.selectedCity).then(({data: {data }}) => {
+        this.weather = data;
+      });
     }
   }
 }
@@ -107,6 +116,6 @@ main {
 }
 
 .vs__dropdown-toggle {
-  height: 55px;
+  height: 70px !important;
 }
 </style>

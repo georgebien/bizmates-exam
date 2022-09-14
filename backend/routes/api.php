@@ -20,14 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get(
-    '/get-cities',
-    [
-        WeatherController::class, 
-        'getCities'
-    ]
-);
-
-Route::get(
     '/get-weather',
     [
         WeatherController::class, 
@@ -40,5 +32,13 @@ Route::get(
     [
         WeatherController::class, 
         'getForecast'
+    ]
+);
+
+Route::get(
+    '/get-places',
+    [
+        WeatherController::class, 
+        'getPlaces'
     ]
 );

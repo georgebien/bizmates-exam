@@ -1,10 +1,32 @@
 import axios from "axios";
 
-export function getCities(keyword) {
+export function getWeather(city) {
 	return axios
-		.get('/api/get-cities', {
+		.get('/api/get-weather', {
 			params: {
-				search: keyword
+				city: city,
+			}
+		})
+		.then(response => response)
+		.catch(error => error)
+}
+
+export function getForecast(city) {
+	return axios
+		.get('/api/get-forecast', {
+			params: {
+				city: city,
+			}
+		})
+		.then(response => response)
+		.catch(error => error)
+}
+
+export function getPlaces(city) {
+	return axios
+		.get('/api/get-places', {
+			params: {
+				city: city,
 			}
 		})
 		.then(response => response)

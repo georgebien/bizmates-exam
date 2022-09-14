@@ -30,36 +30,6 @@ class WeatherController extends Controller
      * 
      * @return JsonResponse
      */
-    public function getCities(Request $request): JsonResponse
-    {
-        try {
-            $response = $this->weatherService->getCities($request->get('search'));
-            $cities = [];
-            foreach ($response['hits'] as $value) {
-                if (isset($value['administrative'])) {
-                    $cities[] = $value['administrative'][0];
-                }
-            }
-
-            return $this->response(
-                Response::HTTP_OK,
-                self::GET_MESSAGE,
-                array_values(array_unique($cities))
-            );
-            
-        } catch (Exception $exception) {
-            return $this->response(
-                Response::HTTP_INTERNAL_SERVER_ERROR,
-                $exception->getMessage()
-            );
-        }
-    }
-
-    /**
-     * @param Request $request
-     * 
-     * @return JsonResponse
-     */
     public function getWeather(Request $request): JsonResponse
     {
         try {
@@ -87,10 +57,31 @@ class WeatherController extends Controller
     public function getForecast(Request $request): JsonResponse
     {
         try {
-            $response = $this->weatherService->getForecast(
-                $request->get('latitude'),
-                $request->get('longitude')
+            $response = $this->weatherService->getForecast($request->get('city'));
+          
+            return $this->response(
+                Response::HTTP_OK,
+                self::GET_MESSAGE,
+                $response
             );
+            
+        } catch (Exception $exception) {
+            return $this->response(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                $exception->getMessage()
+            );
+        }
+    }
+
+    /**
+     * @param Request $request
+     * 
+     * @return JsonResponse
+     */
+    public function getPlaces(Request $request): JsonResponse
+    {
+        try {
+            $response = $this->weatherService->getPlaces($request->get('city'));
           
             return $this->response(
                 Response::HTTP_OK,
