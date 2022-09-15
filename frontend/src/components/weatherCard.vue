@@ -45,7 +45,8 @@
             alt
           />
           <p> {{ data.weather[0].main }}</p>
-          <p>{{ parseInt(data.temp.day) }}° / {{ parseInt(data.temp.night) }}°</p>
+          <span class="day-night-temp">Day: {{ parseInt(data.temp.day) }}°</span>
+          <span class="day-night-temp">Night: {{ parseInt(data.temp.night) }}°</span>
         </span>
       </div>
     </div>
@@ -187,6 +188,10 @@ export default {
 
 .p-details {
   font-size: x-large;
+}
+
+.day-night-temp {
+  font-size: medium;
 }
 
 @media (max-width: 1300px) {
