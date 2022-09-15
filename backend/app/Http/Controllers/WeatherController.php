@@ -20,6 +20,9 @@ class WeatherController extends Controller
      */
     private $weatherService;
 
+    /**
+     * @param WeatherService $weatherService
+     */
     public function __construct(WeatherService $weatherService)
     {
         $this->weatherService = $weatherService;

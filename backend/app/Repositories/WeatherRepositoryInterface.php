@@ -6,6 +6,18 @@ use Illuminate\Http\Request;
 
 interface WeatherRepositoryInterface
 {
-    public function getWeather(string $city);
-    public function getForecast(string $city);
+    /**
+     * @param string $city
+     */
+    public function getWeather(string $city): array;
+
+    /**
+     * @param string $city
+     */
+    public function getForecast(string $city): array;
+
+    /**
+     * @param string $city
+     */
+    public function getPlaces(string $city): array;
 }

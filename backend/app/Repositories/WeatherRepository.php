@@ -16,12 +16,18 @@ class WeatherRepository implements WeatherRepositoryInterface
      */
     private $client;
 
+    /**
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    public function getWeather(string $city)
+    /**
+     * @param string $city
+     */
+    public function getWeather(string $city): array
     {
         $url = sprintf(
             'https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=%s',
@@ -38,7 +44,10 @@ class WeatherRepository implements WeatherRepositoryInterface
         }
     }
     
-    public function getForecast(string $city)
+    /**
+     * @param string $city
+     */
+    public function getForecast(string $city): array
     {
         $url = sprintf(
             'https://api.openweathermap.org/data/2.5/forecast/daily?q=%s&units=metric&appid=%s',
@@ -55,7 +64,10 @@ class WeatherRepository implements WeatherRepositoryInterface
         }
     }
     
-    public function getPlaces(string $city)
+    /**
+     * @param string $city
+     */
+    public function getPlaces(string $city): array
     {
         $url = sprintf(
             'https://api.foursquare.com/v3/places/search?categories=16000&near=%s&limit=6',

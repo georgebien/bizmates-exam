@@ -11,22 +11,34 @@ class WeatherService
      */
     private $weatherRepository;
 
+    /**
+     * @param WeatherRepository $weatherRepository
+     */
     public function __construct(WeatherRepository $weatherRepository)
     {
         $this->weatherRepository = $weatherRepository;
     }
 
-    public function getWeather(string $city)
+    /**
+     * @param string $city
+     */
+    public function getWeather(string $city): array
     {
         return $this->weatherRepository->getWeather($city);
     }
     
-    public function getForecast(string $city)
+    /**
+     * @param string $city
+     */
+    public function getForecast(string $city): array
     {
         return $this->weatherRepository->getForecast($city);
     }
 
-    public function getPlaces(string $city)
+    /**
+     * @param string $city
+     */
+    public function getPlaces(string $city): array
     {
         return $this->weatherRepository->getPlaces($city);
     }
