@@ -111,25 +111,6 @@ main {
   width: 50%;
 }
 
-.v-select .dropdown li {
-  border-bottom: 1px solid rgba(112, 128, 144, 0.1);
-}
-
-.v-select .dropdown li:last-child {
-  border-bottom: none;
-}
-
-.v-select .dropdown li a {
-  padding: 10px 20px;
-  width: 100%;
-  font-size: 1.25em;
-  color: #3c3c3c;
-}
-
-.v-select .dropdown-menu .active > a {
-  color: #fff;
-}
-
 .vs__dropdown-toggle {
   height: 70px !important;
 }
