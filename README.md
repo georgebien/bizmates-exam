@@ -1,4 +1,4 @@
-# Exam
+# Weather app
 
 Good day Sir!
 
