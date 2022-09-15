@@ -20,16 +20,24 @@
           </div>
         </template>
       </vue-select>
+      
+      <div class="alert alert-primary mt-3" role="alert" v-show="selectedCity && !weather">
+        <div class="d-flex align-items-center">
+          <div class="spinner-border" role="status" aria-hidden="true"></div>
+          <strong style="margin-left: 10px;">Loading...</strong>
+        </div>
+      </div>
+
       <weatherCard 
-        v-show="selectedCity" 
+        v-show="selectedCity && weather" 
         :weather="weather"
       ></weatherCard>
+
       <placesCard 
         v-show="selectedCity && weather" 
         :city="selectedCity"
       ></placesCard>
     </main>
-
   </div>
 </template>
 
@@ -77,10 +85,9 @@ export default {
 
   methods: {
     onSelected() {
-      this.weatherLoaded = false;
+      this.weather = null;
       getWeather(this.selectedCity).then(({data: { data }}) => {
         this.weather = data;
-        this.weatherLoaded = true;
       });
     }
   }
